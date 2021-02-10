@@ -229,7 +229,7 @@ button:focus{
       font-size: 2rem;
   }
 
-/* contactform */
+/* count-section */
 
 .count-section{
     padding: 2rem;
@@ -301,12 +301,12 @@ button:focus{
 }
 
 .linkedin:hover{
-    background-color: #0077b5;
+    background-color: #39b500;
     transition: all .4s;
 }
 
 .twitter:hover{
-    background-color: #03A9F4;
+    background-color: #dcf403;
     transition: all .4s;
 }
 

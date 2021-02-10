@@ -1,0 +1,27 @@
+.banner-section{
+    padding: 2rem;
+    min-height: 10rem;
+    background: linear-gradient(rgba(216, 213, 213, 0.752),rgba(196, 193, 193, 0.752));
+
+}
+
+.banner-section .section-title h1{
+font-size: 3.5rem;
+}
+
+
+
+
+/* about us */
+
+.about-us{
+    padding: 5rem 2rem;
+}
+
+.about-img{
+    height: 30rem;
+}
+.banner-back{
+    background: linear-gradient(rgba(199, 195, 195, 0.752),rgba(190, 187, 187, 0.752)), url('../images/learning-3245793_1920.jpg');
+    background-position: center;
+}

@@ -1,6 +1,6 @@
 .box-content{
     width: 100%;
-    height: 89vh;
+    min-height: 89vh;
     background: linear-gradient(rgba(0, 0, 0, 0.752),rgba(0, 0, 0, 0.752)), url('../images/Classroom-2048x1365.jpg');
 }
 
@@ -16,6 +16,10 @@
     background: white;
     margin-top: 150px;
     padding: 30px;
+}
+
+.login-img{
+    height: 30rem;
 }
 
 .form-input{
