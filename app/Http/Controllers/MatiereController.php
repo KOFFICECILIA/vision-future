@@ -2,84 +2,155 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Matiere;
+use App\Http\Requests\CreateMatiereRequest;
+use App\Http\Requests\UpdateMatiereRequest;
+use App\Repositories\MatiereRepository;
+use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use Flash;
+use Response;
 
-class MatiereController extends Controller
+class MatiereController extends AppBaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    /** @var  MatiereRepository */
+    private $matiereRepository;
+
+    public function __construct(MatiereRepository $matiereRepo)
     {
-        //
+        $this->matiereRepository = $matiereRepo;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the Matiere.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        $matieres = $this->matiereRepository->all();
+
+        return view('matieres.index')
+            ->with('matieres', $matieres);
+    }
+
+    /**
+     * Show the form for creating a new Matiere.
+     *
+     * @return Response
      */
     public function create()
     {
-        //
+        return view('matieres.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Matiere in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateMatiereRequest $request
+     *
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(CreateMatiereRequest $request)
     {
-        //
+        $input = $request->all();
+
+        $matiere = $this->matiereRepository->create($input);
+
+        Flash::success('Matiere saved successfully.');
+
+        return redirect(route('matieres.index'));
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Matiere.
      *
-     * @param  \App\Models\Matiere  $matiere
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     *
+     * @return Response
      */
-    public function show(Matiere $matiere)
+    public function show($id)
     {
-        //
+        $matiere = $this->matiereRepository->find($id);
+
+        if (empty($matiere)) {
+            Flash::error('Matiere not found');
+
+            return redirect(route('matieres.index'));
+        }
+
+        return view('matieres.show')->with('matiere', $matiere);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified Matiere.
      *
-     * @param  \App\Models\Matiere  $matiere
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     *
+     * @return Response
      */
-    public function edit(Matiere $matiere)
+    public function edit($id)
     {
-        //
+        $matiere = $this->matiereRepository->find($id);
+
+        if (empty($matiere)) {
+            Flash::error('Matiere not found');
+
+            return redirect(route('matieres.index'));
+        }
+
+        return view('matieres.edit')->with('matiere', $matiere);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified Matiere in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Matiere  $matiere
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @param UpdateMatiereRequest $request
+     *
+     * @return Response
      */
-    public function update(Request $request, Matiere $matiere)
+    public function update($id, UpdateMatiereRequest $request)
     {
-        //
+        $matiere = $this->matiereRepository->find($id);
+
+        if (empty($matiere)) {
+            Flash::error('Matiere not found');
+
+            return redirect(route('matieres.index'));
+        }
+
+        $matiere = $this->matiereRepository->update($request->all(), $id);
+
+        Flash::success('Matiere updated successfully.');
+
+        return redirect(route('matieres.index'));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Matiere from storage.
      *
-     * @param  \App\Models\Matiere  $matiere
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     *
+     * @throws \Exception
+     *
+     * @return Response
      */
-    public function destroy(Matiere $matiere)
+    public function destroy($id)
     {
-        //
+        $matiere = $this->matiereRepository->find($id);
+
+        if (empty($matiere)) {
+            Flash::error('Matiere not found');
+
+            return redirect(route('matieres.index'));
+        }
+
+        $this->matiereRepository->delete($id);
+
+        Flash::success('Matiere deleted successfully.');
+
+        return redirect(route('matieres.index'));
     }
 }

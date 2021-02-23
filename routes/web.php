@@ -31,3 +31,22 @@ Route::post('/logout', [App\Http\Controllers\HomePageController::class, 'logout'
 // Route::get('/', [App\Http\Controllers\HomePageController::class, 'index']);
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::resource('levels', App\Http\Controllers\LevelController::class);
+
+Route::resource('classes', App\Http\Controllers\ClasseController::class);
+
+Route::resource('matieres', App\Http\Controllers\MatiereController::class);
+
+Route::resource('matiereLevels', App\Http\Controllers\MatiereLevelController::class);
+
+Route::resource('students', App\Http\Controllers\StudentController::class);
+
+Route::resource('notes', App\Http\Controllers\NoteController::class);
+
+Route::resource('trimesters', App\Http\Controllers\TrimesterController::class);

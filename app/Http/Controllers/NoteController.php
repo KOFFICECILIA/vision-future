@@ -2,84 +2,155 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Note;
+use App\Http\Requests\CreateNoteRequest;
+use App\Http\Requests\UpdateNoteRequest;
+use App\Repositories\NoteRepository;
+use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use Flash;
+use Response;
 
-class NoteController extends Controller
+class NoteController extends AppBaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    /** @var  NoteRepository */
+    private $noteRepository;
+
+    public function __construct(NoteRepository $noteRepo)
     {
-        //
+        $this->noteRepository = $noteRepo;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the Note.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        $notes = $this->noteRepository->all();
+
+        return view('notes.index')
+            ->with('notes', $notes);
+    }
+
+    /**
+     * Show the form for creating a new Note.
+     *
+     * @return Response
      */
     public function create()
     {
-        //
+        return view('notes.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Note in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateNoteRequest $request
+     *
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(CreateNoteRequest $request)
     {
-        //
+        $input = $request->all();
+
+        $note = $this->noteRepository->create($input);
+
+        Flash::success('Note saved successfully.');
+
+        return redirect(route('notes.index'));
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Note.
      *
-     * @param  \App\Models\Note  $note
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     *
+     * @return Response
      */
-    public function show(Note $note)
+    public function show($id)
     {
-        //
+        $note = $this->noteRepository->find($id);
+
+        if (empty($note)) {
+            Flash::error('Note not found');
+
+            return redirect(route('notes.index'));
+        }
+
+        return view('notes.show')->with('note', $note);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified Note.
      *
-     * @param  \App\Models\Note  $note
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     *
+     * @return Response
      */
-    public function edit(Note $note)
+    public function edit($id)
     {
-        //
+        $note = $this->noteRepository->find($id);
+
+        if (empty($note)) {
+            Flash::error('Note not found');
+
+            return redirect(route('notes.index'));
+        }
+
+        return view('notes.edit')->with('note', $note);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified Note in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Note  $note
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @param UpdateNoteRequest $request
+     *
+     * @return Response
      */
-    public function update(Request $request, Note $note)
+    public function update($id, UpdateNoteRequest $request)
     {
-        //
+        $note = $this->noteRepository->find($id);
+
+        if (empty($note)) {
+            Flash::error('Note not found');
+
+            return redirect(route('notes.index'));
+        }
+
+        $note = $this->noteRepository->update($request->all(), $id);
+
+        Flash::success('Note updated successfully.');
+
+        return redirect(route('notes.index'));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Note from storage.
      *
-     * @param  \App\Models\Note  $note
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     *
+     * @throws \Exception
+     *
+     * @return Response
      */
-    public function destroy(Note $note)
+    public function destroy($id)
     {
-        //
+        $note = $this->noteRepository->find($id);
+
+        if (empty($note)) {
+            Flash::error('Note not found');
+
+            return redirect(route('notes.index'));
+        }
+
+        $this->noteRepository->delete($id);
+
+        Flash::success('Note deleted successfully.');
+
+        return redirect(route('notes.index'));
     }
 }

@@ -2,84 +2,155 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Classe;
+use App\Http\Requests\CreateClasseRequest;
+use App\Http\Requests\UpdateClasseRequest;
+use App\Repositories\ClasseRepository;
+use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use Flash;
+use Response;
 
-class ClasseController extends Controller
+class ClasseController extends AppBaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    /** @var  ClasseRepository */
+    private $classeRepository;
+
+    public function __construct(ClasseRepository $classeRepo)
     {
-        //
+        $this->classeRepository = $classeRepo;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the Classe.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        $classes = $this->classeRepository->all();
+
+        return view('classes.index')
+            ->with('classes', $classes);
+    }
+
+    /**
+     * Show the form for creating a new Classe.
+     *
+     * @return Response
      */
     public function create()
     {
-        //
+        return view('classes.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Classe in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateClasseRequest $request
+     *
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(CreateClasseRequest $request)
     {
-        //
+        $input = $request->all();
+
+        $classe = $this->classeRepository->create($input);
+
+        Flash::success('Classe saved successfully.');
+
+        return redirect(route('classes.index'));
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Classe.
      *
-     * @param  \App\Models\Classe  $classe
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     *
+     * @return Response
      */
-    public function show(Classe $classe)
+    public function show($id)
     {
-        //
+        $classe = $this->classeRepository->find($id);
+
+        if (empty($classe)) {
+            Flash::error('Classe not found');
+
+            return redirect(route('classes.index'));
+        }
+
+        return view('classes.show')->with('classe', $classe);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified Classe.
      *
-     * @param  \App\Models\Classe  $classe
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     *
+     * @return Response
      */
-    public function edit(Classe $classe)
+    public function edit($id)
     {
-        //
+        $classe = $this->classeRepository->find($id);
+
+        if (empty($classe)) {
+            Flash::error('Classe not found');
+
+            return redirect(route('classes.index'));
+        }
+
+        return view('classes.edit')->with('classe', $classe);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified Classe in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Classe  $classe
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @param UpdateClasseRequest $request
+     *
+     * @return Response
      */
-    public function update(Request $request, Classe $classe)
+    public function update($id, UpdateClasseRequest $request)
     {
-        //
+        $classe = $this->classeRepository->find($id);
+
+        if (empty($classe)) {
+            Flash::error('Classe not found');
+
+            return redirect(route('classes.index'));
+        }
+
+        $classe = $this->classeRepository->update($request->all(), $id);
+
+        Flash::success('Classe updated successfully.');
+
+        return redirect(route('classes.index'));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Classe from storage.
      *
-     * @param  \App\Models\Classe  $classe
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     *
+     * @throws \Exception
+     *
+     * @return Response
      */
-    public function destroy(Classe $classe)
+    public function destroy($id)
     {
-        //
+        $classe = $this->classeRepository->find($id);
+
+        if (empty($classe)) {
+            Flash::error('Classe not found');
+
+            return redirect(route('classes.index'));
+        }
+
+        $this->classeRepository->delete($id);
+
+        Flash::success('Classe deleted successfully.');
+
+        return redirect(route('classes.index'));
     }
 }
