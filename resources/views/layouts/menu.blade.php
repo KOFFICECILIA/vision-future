@@ -54,3 +54,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('notes.index') }}"
+       class="nav-link {{ Request::is('notes*') ? 'active' : '' }}">
+        <p>Notes</p>
+    </a>
+</li>
+
+

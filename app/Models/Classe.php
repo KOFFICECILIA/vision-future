@@ -56,5 +56,15 @@ class Classe extends Model
         
     ];
 
+    public function school(){
+        return $this->belongsTo(School::class, 'school_id', 'id');
+    }
     
+    public function level(){
+        return $this->belongsTo(Level::class, 'level_id', 'id');
+    }
+
+    public function students(){
+        return $this->hasMany(Student::class, 'classe_id', 'id');
+    }
 }

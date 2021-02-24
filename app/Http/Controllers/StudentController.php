@@ -8,6 +8,7 @@ use App\Repositories\StudentRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Auth;
 use Response;
 
 class StudentController extends AppBaseController
@@ -54,13 +55,15 @@ class StudentController extends AppBaseController
      */
     public function store(CreateStudentRequest $request)
     {
+        // dd($request->all());
         $input = $request->all();
 
         $student = $this->studentRepository->create($input);
 
         Flash::success('Student saved successfully.');
 
-        return redirect(route('students.index'));
+        return redirect('/dashboard');
+        // return redirect(route('students.index'));
     }
 
     /**
@@ -97,10 +100,13 @@ class StudentController extends AppBaseController
         if (empty($student)) {
             Flash::error('Student not found');
 
-            return redirect(route('students.index'));
+            // return redirect(route('students.index'));
+            return redirect()->back();
         }
 
-        return view('students.edit')->with('student', $student);
+        $classes = \App\Models\Classe::where('school_id', Auth::guard('school')->user()->id)->get();
+        return view('student_edit')->with('student', $student)->with('classes', $classes);
+        // return view('students.edit')->with('student', $student);
     }
 
     /**
@@ -118,14 +124,16 @@ class StudentController extends AppBaseController
         if (empty($student)) {
             Flash::error('Student not found');
 
-            return redirect(route('students.index'));
+            return redirect()->back();
+            // return redirect(route('students.index'));
         }
 
         $student = $this->studentRepository->update($request->all(), $id);
 
         Flash::success('Student updated successfully.');
 
-        return redirect(route('students.index'));
+        return redirect('/dashboard');
+        // return redirect(route('students.index'));
     }
 
     /**
@@ -144,13 +152,15 @@ class StudentController extends AppBaseController
         if (empty($student)) {
             Flash::error('Student not found');
 
-            return redirect(route('students.index'));
+            return redirect()->back();
+            // return redirect(route('students.index'));
         }
 
         $this->studentRepository->delete($id);
 
         Flash::success('Student deleted successfully.');
 
-        return redirect(route('students.index'));
+        return redirect('/dashboard');
+        // return redirect(route('students.index'));
     }
 }

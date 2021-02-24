@@ -25,9 +25,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{url('/')}}">Accueil</a>
                 </li>
-                <li class="nav-item">
+                {{--<li class="nav-item">
                     <a class="nav-link" href="{{url('/verification')}}">Identification</a>
-                </li>
+                </li>--}}
                 @if(!Auth::check())
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -50,14 +50,14 @@
                     <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">contact</a>
                 </li>
             </ul>
-            @if(!Auth::check())
+            @if(!Auth::guard('school')->check())
               <form class="form-inline w-100 ml-auto navbar-form">
                 <a href="{{url('/school/connexion')}}" class="primary-btn">Se connecter</a>
               </form>
             @else
               <form id="logout-form" class="form-inline w-100 ml-auto navbar-form" action="{{url('/logout')}}" method="POST">
                 @csrf
-                <a href="{{url('/logout')}}" class="primary-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">>Se déconnecter</a>
+                <a href="{{url('/logout')}}" class="primary-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Se déconnecter</a>
               </form>
               <!-- <a class="dropdown-item" href="{{ Auth::check() ? url('/admin/logout') :  url('/restaurant/logout') }}" class="btn btn-default btn-flat"
                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

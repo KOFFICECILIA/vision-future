@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class NoteRepository
  * @package App\Repositories
- * @version February 23, 2021, 12:44 am UTC
+ * @version February 24, 2021, 11:10 am UTC
 */
 
 class NoteRepository extends BaseRepository
@@ -17,12 +17,7 @@ class NoteRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'note',
-        'student_id',
-        'matiere_level_id',
-        'coefficient_note',
-        'is_active',
-        'trimester_id'
+        
     ];
 
     /**

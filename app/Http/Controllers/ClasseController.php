@@ -60,7 +60,8 @@ class ClasseController extends AppBaseController
 
         Flash::success('Classe saved successfully.');
 
-        return redirect(route('classes.index'));
+        return redirect('/dashboard');
+        // return redirect(route('classes.index'));
     }
 
     /**
@@ -97,10 +98,13 @@ class ClasseController extends AppBaseController
         if (empty($classe)) {
             Flash::error('Classe not found');
 
-            return redirect(route('classes.index'));
+            // return redirect(route('classes.index'));
+            return redirect()->back();
         }
 
-        return view('classes.edit')->with('classe', $classe);
+        $levels = \App\Models\Level::where('is_active', 1)->get();
+        return view('classe_edit')->with('classe', $classe)->with('levels', $levels);
+        // return view('classes.edit')->with('classe', $classe);
     }
 
     /**
@@ -118,14 +122,16 @@ class ClasseController extends AppBaseController
         if (empty($classe)) {
             Flash::error('Classe not found');
 
-            return redirect(route('classes.index'));
+            return redirect()->back();
+            // return redirect(route('classes.index'));
         }
 
         $classe = $this->classeRepository->update($request->all(), $id);
 
         Flash::success('Classe updated successfully.');
 
-        return redirect(route('classes.index'));
+        // return redirect(route('classes.index'));
+        return redirect('/dashboard');
     }
 
     /**
@@ -144,13 +150,15 @@ class ClasseController extends AppBaseController
         if (empty($classe)) {
             Flash::error('Classe not found');
 
-            return redirect(route('classes.index'));
+            return redirect()->back();
+            // return redirect(route('classes.index'));
         }
 
         $this->classeRepository->delete($id);
 
         Flash::success('Classe deleted successfully.');
 
-        return redirect(route('classes.index'));
+        // return redirect(route('classes.index'));
+        return redirect('/dashboard');
     }
 }

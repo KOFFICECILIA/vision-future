@@ -17,10 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\HomePageController::class, 'index']);
 Route::get('/verification', [App\Http\Controllers\HomePageController::class, 'verif']);
+Route::post('/verification', [App\Http\Controllers\HomePageController::class, 'verification']);
 Route::get('/school/inscription', [App\Http\Controllers\HomePageController::class, 'ecoleInscription']);
 Route::get('/school/connexion', [App\Http\Controllers\HomePageController::class, 'ecoleConnexion']);
 Route::get('/about', [App\Http\Controllers\HomePageController::class, 'about']);
 Route::get('/dashboard', [App\Http\Controllers\HomePageController::class, 'dashboard']);
+Route::get('/student/register', [App\Http\Controllers\HomePageController::class, 'studentForm']);
+// Route::get('/student/{}', [App\Http\Controllers\HomePageController::class, 'studentForm']);
 Route::post('/school/inscription', [App\Http\Controllers\HomePageController::class, 'ecoleInscriptionPost'])->name('registerSchool');
 Route::post('/school/connexion', [App\Http\Controllers\HomePageController::class, 'ecoleConnexionPost'])->name('loginSchool');
 

@@ -1,15 +1,14 @@
-<!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>details eleves</title>
+        <title>dashboard</title>
 
-        <link rel="stylesheet" href="public/css/bootstrap.min.css">
-        <link rel="stylesheet" href="public/css/styles.css">
-        <link rel="stylesheet" href="dashs.css">
+        <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/styles.css')}}">
+        <link rel="stylesheet" href="{{asset('css/dashs.css')}}">
 
-        <script src="js/jquery.min.js"></script>
+        <script src="{{asset('js/jquery.min.js')}}"></script>
     </head>
         
     <body>
@@ -20,19 +19,19 @@
                 <div class="text-center mb-5 mt-5 sidebar-box-user">
                     <div class="item-center">
                         <div class="active-user mx-auto">
-                            <img src="undraw_book_lover_mkck.svg" alt="photo de profil">
+                            <img src="{{asset('images/undraw_book_lover_mkck.svg')}}" alt="photo de profil">
                         </div>
                     </div>
                     <div class="text-center">
-                        <h4>sainte Marie</h4>
-                        <h5 style="color:var(--color-primary)">responsable informatique</h5>
+                        <h4>{{Auth::guard('school')->user()->ecole}}</h4>
+                        <h5 style="color:var(--color-primary)">{{ Auth::guard('school')->user()->code  }}</h5>
                     </div>
                 </div>
                 <div>
                     <ul class="sidebar-menu-list">
                         <li class="">
-                            <a href="#" class="sidebar-menu-item">
-                                <img src="undraw_exams_g4ow.svg" class="icon-side" alt=""> &nbsp;
+                            <a href="{{url('/dashboard')}}" class="sidebar-menu-item">
+                                <img src="{{asset('images/undraw_exams_g4ow.svg')}}" class="icon-side" alt=""> &nbsp;
                                 Accueil
                             </a>
                             <div class="sidebar-menu-dropdown">
@@ -47,29 +46,42 @@
                                 </ul>
                             </div>
                         </li>
-                        <li>
+                        {{--<li>
                             <a href="#" class="sidebar-menu-item">
-                                <img src="undraw_exams_g4ow.svg" class="icon-side" alt=""> &nbsp;
+                                <img src="{{asset('images/undraw_exams_g4ow.svg')}}" class="icon-side" alt=""> &nbsp;
                                 Compte
+                            </a>
+                        </li>--}}
+                        <li>
+                            <a href="{{url('/classe/register')}}" class="sidebar-menu-item">
+                                <img src="{{asset('images/undraw_exams_g4ow.svg')}}" class="icon-side" alt=""> &nbsp;
+                                Enregistrement classes
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="sidebar-menu-item">
-                                <img src="undraw_exams_g4ow.svg" class="icon-side" alt=""> &nbsp;
+                            <a href="{{url('/student/register')}}" class="sidebar-menu-item">
+                                <img src="{{asset('images/undraw_exams_g4ow.svg')}}" class="icon-side" alt=""> &nbsp;
                                 Enregistrement élèves
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="sidebar-menu-item">
-                                <img src="undraw_exams_g4ow.svg" class="icon-side" alt=""> &nbsp;
+                            <a href="{{url('/verification')}}" class="sidebar-menu-item">
+                                <img src="{{asset('images/undraw_exams_g4ow.svg')}}" class="icon-side" alt=""> &nbsp;
                                 Verification candidats
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="sidebar-menu-item">
-                                <img src="undraw_exams_g4ow.svg" class="icon-side" alt=""> &nbsp;
+                            {{--<a href="#" class="sidebar-menu-item">
+                                <img src="{{asset('images/undraw_exams_g4ow.svg')}}" class="icon-side" alt=""> &nbsp;
                                 Parametre
-                            </a>
+                            </a>--}}
+                            <form id="logout-form" class="form-inline w-100 ml-auto navbar-form" action="{{url('/logout')}}" method="POST">
+                                @csrf
+                                <a href="{{url('/logout')}}" class="sidebar-menu-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <img src="{{asset('images/undraw_exams_g4ow.svg')}}" class="icon-side" alt="">
+                                    &nbsp; Se déconnecter
+                                </a>
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -84,15 +96,15 @@
                 <div class="container position-relative">
                     <div class="navigation-bar-block">
                         <a href="#" class="platform-logo">
-                            Dashboard > détails
+                            Dashboard
                         </a>
                         <ul class="mb-0">
                             <li>
                                 <a href="#">
-                                   <img src="./public/images/facebook.svg" alt="icon"> 
+                                   <img src="{{asset('images/undraw_book_lover_mkck.svg')}}" alt="icon"> 
                                 </a>
                             </li>
-                            <li>
+                            {{--<li>
                                 <a href="#">
                                    <img src="Ressources/Icons/share2.svg" alt="icon"> 
                                 </a>
@@ -101,10 +113,10 @@
                                 <a href="#" id="sub-menu-control">
                                    <img src="Ressources/Icons/pixel.svg" alt="icon"> 
                                 </a>
-                            </li>
+                            </li>--}}
                         </ul>
                     </div>
-                    <div class="nav-dropdown" id="navigation-sub-menu">
+                    {{--<div class="nav-dropdown" id="navigation-sub-menu">
                         <div class="nav-dropdown-content">
                             <div>
                                 <a href="#">
@@ -183,44 +195,16 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
             </nav>
-
-            <div class="container">
-                <div class="containt-success">
-                    <div class="block-success">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="block-success_info">
-                                    <h1>Verification de d'identité</h1>
-                                    <p>Nom : <b>KONAN</b> </p>
-                                    <p>Prénoms : <b>KONAN OSCAR</b> </p>
-                                    <p>Matricule : <b>20036548B</b> </p>
-                                    <p>Niveau : <b>Terminale D</b> </p>
-                                    <div class="block-success_info-illustrator">
-                                        <img src="" alt="">
-                                        <p>vous etes autorisé</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="block-success_illustrator">
-                                    <img src="" alt="" class="img-fluid cadre-photo">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+ 
+            @yield('content')
 
         </section>
 
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
+        <script src="{{asset('js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('js/main.js')}}"></script>
         
     </body>
 </html>
-
-
-
