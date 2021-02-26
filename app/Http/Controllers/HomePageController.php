@@ -36,10 +36,10 @@ class HomePageController extends Controller{
             ->get();
         
         $classes = Classe::join('levels', 'classes.level_id', '=', 'levels.id')
-        ->select('classes.*')
-        ->where('classes.school_id', '=', $school->id)
-        ->where('levels.is_active', '=', 1)
-        ->where('classes.is_active', '=', 1)->get();
+            ->select('classes.*')
+            ->where('classes.school_id', '=', $school->id)
+            ->where('levels.is_active', '=', 1)
+            ->get();
         // $students = Student::where('is_active', 1)->where(function($student) use($school) {
         //     $student->classe->school->id == $school->id;
         // })->get();

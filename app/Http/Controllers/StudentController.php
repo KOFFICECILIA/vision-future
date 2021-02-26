@@ -66,6 +66,7 @@ class StudentController extends AppBaseController
             $input['photo'] = $request->file('photo')->store('uploads/'.$count , 'public');
             // dd($input['photo']);
         }
+        $input['is_active'] = $request->is_active ?? 0;
 
         $student = $this->studentRepository->create($input);
 
@@ -142,6 +143,8 @@ class StudentController extends AppBaseController
         }else{
             $input['photo'] = $student->photo;
         }
+
+        $input['is_active'] = $request->is_active ?? 0;
 
         $student = $this->studentRepository->update($request->all(), $id);
 

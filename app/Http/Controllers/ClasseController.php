@@ -54,7 +54,10 @@ class ClasseController extends AppBaseController
      */
     public function store(CreateClasseRequest $request)
     {
+        // dd($request->all());
         $input = $request->all();
+
+        $input['is_active'] = $request->is_active ?? 0;
 
         $classe = $this->classeRepository->create($input);
 
@@ -119,6 +122,8 @@ class ClasseController extends AppBaseController
     {
         $classe = $this->classeRepository->find($id);
 
+        $input = $request->all();
+
         if (empty($classe)) {
             Flash::error('Classe not found');
 
@@ -126,7 +131,9 @@ class ClasseController extends AppBaseController
             // return redirect(route('classes.index'));
         }
 
-        $classe = $this->classeRepository->update($request->all(), $id);
+        $input['is_active'] = $request->is_active ?? 0;
+
+        $classe = $this->classeRepository->update($input, $id);
 
         Flash::success('Classe updated successfully.');
 

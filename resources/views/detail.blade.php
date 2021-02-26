@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-4">
                         <div class="block-success_illustrator">
-                            <img src="{{asset('storage/'.$student->photo)}}" alt="{{ $student->name }} {{ $student->lastname }}" class="img-fluid cadre-photo">
+                            <img src="{{asset('storage/'.$student->photo)}}" alt="{{ $student->name }} {{ $student->lastname }}" height="200" class="cadre-photo">
                         </div>
                     </div>
                     @else

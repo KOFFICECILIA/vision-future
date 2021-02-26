@@ -29,7 +29,7 @@
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="matricule" class="couleur-form">Matricule</label>
-                                <input id="matricule" type="text" name="matricule" class="form-input" placeholder="Le matricule de l'étudiant"  value="{{$student->matricule}}">
+                                <input id="matricule" type="text" name="matricule" class="form-input" placeholder="Le matricule de l'étudiant"  value="{{$student->matricule}}" required>
                                 <p class="comments"></p>
                             </div>
                             <div class="col-md-6 mb-2">
@@ -40,20 +40,20 @@
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="date" class="couleur-form">Date de naissance</label>
-                                <input type="date" name="birthday" class="form-control" id="date" placeholder="Date de naissance"  value="{{$student->birthday}}">
+                                <input type="date" name="birthday" class="form-control" id="date" placeholder="Date de naissance"  value="{{$student->birthday}}" required>
                                 <!-- <input id="" type="number" name="" class="form-input" placeholder="Le matricule de l'étudiant"> -->
                                 <p class="comments"></p>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="" class="couleur-form">Actif</label>
+                                <!-- <input type="hidden" name="is_active" value="0"> -->
                                 <input type="checkbox" name="is_active" value="1" {!! $student->is_active == 1 ? 'checked' : '' !!}>
-                                <input type="hidden" name="is_active" value="0">
                                 <!-- <input id="" type="number" name="" class="form-input" placeholder="Le matricule de l'étudiant"> -->
                                 <p class="comments"></p>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="" class="couleur-form">Photo</label>
-                                <input id="" type="file" name="photo" onchange="loadFile(event)" class="form-file" placeholder="Le matricule de l'étudiant">
+                                <input id="" type="file" name="photo" required class="form-file" placeholder="Le matricule de l'étudiant">
                                 <p class="comments"></p>
                             </div>
                             <div class="col-md-6 mb-2">
@@ -76,7 +76,7 @@
             </div>
         </div>
     </div>
-    <script>
+    <!-- <script>
         var loadFile = function (event) {
             var reader = new FileReader();
             reader.onload = function () {
@@ -85,5 +85,5 @@
             };
             reader.readAsDataURL(event.target.files[0]);
         }
-    </script>
+    </script> -->
 @endsection

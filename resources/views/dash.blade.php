@@ -127,8 +127,8 @@
                                 {
                                     data: [{{$exam_classe->count()}}, {{$classes->count() - $exam_classe->count()}}],
                                     backgroundColor: [
-                                        'rgba(54, 162, 235, 0.4)',
-                                        'rgba(255, 206, 86, 0.9)'
+                                        "{{'rgba('.rand(0,255).','.rand(0,255).','.rand(0,255).', 0.4)'}}",
+                                        "{{'rgba('.rand(0,255).','.rand(0,255).','.rand(0,255).', 0.4)'}}"
                                     ]
                                 }
                                 ],
@@ -154,6 +154,7 @@
                         <tr>
                         <th scope="col">Titre</th>
                         <th scope="col">Niveau</th>
+                        <th scope="col">Etat</th>
                         <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -161,7 +162,8 @@
                         @foreach($classes as $classe)
                         <tr>
                         <td>{{$classe->title}}</td>
-                        <td>{{$student->level->title ?? ''}}</td>
+                        <td>{{$classe->level->title ?? ''}}</td>
+                        <td>{!! $classe->is_active ? '<span class="btn btn-success"> Actif </span>' : '<span class="btn btn-danger"> Inactif </span>' !!}</td>
                         <td>
                             <a href="{{ route('classes.edit', [$classe->id]) }}" class="action-btn btn-color1">modifier</a>
                             {!! Form::open(['route' => ['classes.destroy', $classe->id], 'method' => 'delete']) !!}
@@ -185,6 +187,8 @@
                         <th scope="col">Nom élèves</th>
                         <th scope="col">Matricule</th>
                         <th scope="col">Niveau</th>
+                        <th scope="col">Date de naissance</th>
+                        <th scope="col">Etat</th>
                         <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -193,12 +197,14 @@
                         <tr>
                         <th scope="row">
                             @if(!is_null($student->photo))
-                                <img src="{{asset('storage/'.$student->photo)}}" class="img-fluid student-img" alt="icon"> 
+                                <img src="{{asset('storage/'.$student->photo)}}" class="student-img" height="90" alt="icon"> 
                             @endif
                         </th>
                         <td>{{$student->name}} {{$student->lastname}}</td>
+                        <td>{{$student->birthday}}</td>
                         <td>{{$student->matricule}}</td>
                         <td>{{$student->classe->level->title ?? ''}}</td>
+                        <td>{!! $student->is_active ? '<span class="btn btn-success"> Actif </span>' : '<span class="btn btn-danger"> Inactif </span>' !!}</td>
                         <td>
                             <a href="{{ route('students.edit', [$student->id]) }}" class="action-btn btn-color1">modifier</a>
                             {!! Form::open(['route' => ['students.destroy', $student->id], 'method' => 'delete']) !!}
