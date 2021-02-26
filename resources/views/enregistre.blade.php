@@ -5,7 +5,7 @@
         <div class="containt-success">
             <div class="block-form">
                 <div class="row">
-                    {!! Form::open(['route' => 'students.store', 'id' => 'contact-form']) !!}
+                    {!! Form::open(['route' => 'students.store', 'id' => 'contact-form', 'files' => true]) !!}
                         <div class="row">
                             <div class="col-md-6 mb-2">
                                 <label for="" class="couleur-form">Nom</label>
@@ -51,11 +51,14 @@
                                 <!-- <input id="" type="number" name="" class="form-input" placeholder="Le matricule de l'étudiant"> -->
                                 <p class="comments"></p>
                             </div>
-                            {{--<div class="col-md-6 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="" class="couleur-form">Photo</label>
-                                <input id="" type="file" name="" class="form-file" placeholder="Le matricule de l'étudiant">
+                                <input id="" type="file" name="photo" onchange="loadFile(event)" class="form-file" placeholder="Le matricule de l'étudiant">
                                 <p class="comments"></p>
-                            </div>--}}
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <img src="" max-width="200" id="output_cover" alt="">
+                            </div>
                         </div>
                         <hr>
                         <div class="row">
@@ -73,4 +76,14 @@
             </div>
         </div>
     </div>
+    <script>
+        var loadFile = function (event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('output_cover');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 @endsection

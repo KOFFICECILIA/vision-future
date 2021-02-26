@@ -15,7 +15,7 @@
                             <p>Matricule : <b>{{ $student->matricule }}</b> </p>
                             <div class="block-success_info-illustrator">
                                 <p>Classe : <b>{{ $student->classe->title ?? '' }}</b> </p>
-                                <img src="" alt="">
+                                <!-- <img src="" alt=""> -->
                                 
                             </div>
                             <p> {{ $student->is_active ? 'vous etes autorisé' : 'vous n\'êtes pas autorisé'}} </p>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-4">
                         <div class="block-success_illustrator">
-                            <img src="" alt="" class="img-fluid cadre-photo">
+                            <img src="{{asset('storage/'.$student->photo)}}" alt="{{ $student->name }} {{ $student->lastname }}" class="img-fluid cadre-photo">
                         </div>
                     </div>
                     @else

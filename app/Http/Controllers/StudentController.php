@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Repositories\StudentRepository;
+use App\Models\Student;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -60,10 +61,10 @@ class StudentController extends AppBaseController
         // dd($request->all());
         $input = $request->all();
 
-
         if ($request->file('photo')){
             $count = Student::all()->count() + 1;
             $input['photo'] = $request->file('photo')->store('uploads/'.$count , 'public');
+            // dd($input['photo']);
         }
 
         $student = $this->studentRepository->create($input);

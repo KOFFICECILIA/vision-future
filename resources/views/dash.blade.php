@@ -192,7 +192,9 @@
                         @foreach($students as $student)
                         <tr>
                         <th scope="row">
-                            <img src="{{asset('image/undraw_book_lover_mkck.svg')}}" class="img-fluid student-img" alt="icon"> 
+                            @if(!is_null($student->photo))
+                                <img src="{{asset('storage/'.$student->photo)}}" class="img-fluid student-img" alt="icon"> 
+                            @endif
                         </th>
                         <td>{{$student->name}} {{$student->lastname}}</td>
                         <td>{{$student->matricule}}</td>

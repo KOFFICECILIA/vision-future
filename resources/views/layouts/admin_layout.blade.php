@@ -53,7 +53,7 @@
                             </a>
                         </li>--}}
                         <li>
-                            <a href="{{url('/classe/register')}}" class="sidebar-menu-item">
+                            <a href="{{url('/classes/register')}}" class="sidebar-menu-item">
                                 <img src="{{asset('images/undraw_exams_g4ow.svg')}}" class="icon-side" alt=""> &nbsp;
                                 Enregistrement classes
                             </a>

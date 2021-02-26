@@ -5,7 +5,7 @@
         <div class="containt-success">
             <div class="block-form">
                 <div class="row">
-                    {!! Form::model($student, ['route' => ['students.update', $student->id], 'method' => 'patch']) !!}
+                    {!! Form::model($student, ['route' => ['students.update', $student->id], 'method' => 'patch', 'files' => true]) !!}
                         <div class="row">
                             <div class="col-md-6 mb-2">
                                 <label for="" class="couleur-form">Nom</label>
@@ -34,13 +34,13 @@
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="gender" class="couleur-form">Sexe</label><br>
-                                <input type="radio" name="gender" id="gender" value="1" > Homme &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="gender" id="gender" value="0"> Femme
+                                <input type="radio" name="gender" id="gender" value="1" {!! $student->gender == 1 ? 'checked' : '' !!}> Homme &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="gender" id="gender" value="0" {!! $student->gender == 0 ? 'checked' : '' !!}> Femme
                                 <!-- <input id="" type="number" name="" class="form-input" placeholder="Le matricule de l'étudiant"> -->
                                 <p class="comments"></p>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="date" class="couleur-form">Date de naissance</label>
-                                <input type="date" name="birthday" class="form-control" id="date" placeholder="Date de naissance"  value="{{$student->name}}">
+                                <input type="date" name="birthday" class="form-control" id="date" placeholder="Date de naissance"  value="{{$student->birthday}}">
                                 <!-- <input id="" type="number" name="" class="form-input" placeholder="Le matricule de l'étudiant"> -->
                                 <p class="comments"></p>
                             </div>
@@ -51,11 +51,14 @@
                                 <!-- <input id="" type="number" name="" class="form-input" placeholder="Le matricule de l'étudiant"> -->
                                 <p class="comments"></p>
                             </div>
-                            {{--<div class="col-md-6 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="" class="couleur-form">Photo</label>
-                                <input id="" type="file" name="" class="form-file" placeholder="Le matricule de l'étudiant">
+                                <input id="" type="file" name="photo" onchange="loadFile(event)" class="form-file" placeholder="Le matricule de l'étudiant">
                                 <p class="comments"></p>
-                            </div>--}}
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <img src="{{asset('$student->photo')}}" max-width="200" id="output_cover" alt="{{ $student->name }} {{ $student->lastname }}">
+                            </div>
                         </div>
                         <hr>
                         <div class="row">
@@ -73,4 +76,14 @@
             </div>
         </div>
     </div>
+    <script>
+        var loadFile = function (event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('output_cover');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 @endsection
