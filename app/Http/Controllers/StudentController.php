@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Flash;
 use Auth;
 use Response;
+use Illuminate\Support\Facades\Storage;
+
 
 class StudentController extends AppBaseController
 {
@@ -57,6 +59,12 @@ class StudentController extends AppBaseController
     {
         // dd($request->all());
         $input = $request->all();
+
+
+        if ($request->file('photo')){
+            $count = Student::all()->count() + 1;
+            $input['photo'] = $request->file('photo')->store('uploads/'.$count , 'public');
+        }
 
         $student = $this->studentRepository->create($input);
 
@@ -126,6 +134,12 @@ class StudentController extends AppBaseController
 
             return redirect()->back();
             // return redirect(route('students.index'));
+        }
+
+        if ($request->file('photo')){
+            $input['photo'] = $request->file('photo')->store('uploads/'.$student->id , 'public');
+        }else{
+            $input['photo'] = $student->photo;
         }
 
         $student = $this->studentRepository->update($request->all(), $id);

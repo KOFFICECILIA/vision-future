@@ -23,6 +23,7 @@ Route::get('/school/connexion', [App\Http\Controllers\HomePageController::class,
 Route::get('/about', [App\Http\Controllers\HomePageController::class, 'about']);
 Route::get('/dashboard', [App\Http\Controllers\HomePageController::class, 'dashboard']);
 Route::get('/student/register', [App\Http\Controllers\HomePageController::class, 'studentForm']);
+Route::get('/classes/register', [App\Http\Controllers\HomePageController::class, 'classeForm']);
 // Route::get('/student/{}', [App\Http\Controllers\HomePageController::class, 'studentForm']);
 Route::post('/school/inscription', [App\Http\Controllers\HomePageController::class, 'ecoleInscriptionPost'])->name('registerSchool');
 Route::post('/school/connexion', [App\Http\Controllers\HomePageController::class, 'ecoleConnexionPost'])->name('loginSchool');

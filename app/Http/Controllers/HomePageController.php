@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\School;
 use App\Models\Student;
 use App\Models\Classe;
+use App\Models\Level;
 use Hash;
 use Auth;
 
