@@ -6,7 +6,7 @@
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 mb-3">
                 <div class="dashboard-card bg-c1">
                     <div class="dashboard-card__icon-box bg-c1">
-                        <img src="1.png"  class="img-fluid" alt="icon">
+                        <img src="{{asset('images/value.svg')}}"  class="img-fluid" alt="icon">
                     </div>
                     <h3>total étudiants</h3>
                     <h2 style="color: var(--color-secondary);">&ensp; {{$students->count() }}</h2>
@@ -15,7 +15,7 @@
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 mb-3">
                 <div class="dashboard-card bg-c2">
                     <div class="dashboard-card__icon-box bg-c2">
-                        <img src="2.png"  class="img-fluid" alt="icon">    
+                        <img src="{{asset('images/education.svg')}}"  class="img-fluid" alt="icon">    
                     </div>
                     <h3>classes</h3>
                     <h2 style="color: var(--color-secondary);">&ensp; {{$classes->count()}}</h2>
@@ -24,7 +24,7 @@
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 mb-3">
                 <div class="dashboard-card bg-c3">
                     <div class="dashboard-card__icon-box bg-c3">
-                        <img src="3.png"  class="img-fluid" alt="icon">
+                        <img src="{{asset('images/school.svg')}}"  class="img-fluid" alt="icon">
                     </div>
                     <h3>Classe d'examen</h3>
                     @php
@@ -185,9 +185,9 @@
                         <tr>
                         <th scope="col">Photos</th>
                         <th scope="col">Nom élèves</th>
+                        <th scope="col">Date de naissance</th>
                         <th scope="col">Matricule</th>
                         <th scope="col">Niveau</th>
-                        <th scope="col">Date de naissance</th>
                         <th scope="col">Etat</th>
                         <th scope="col">Action</th>
                         </tr>
@@ -197,7 +197,7 @@
                         <tr>
                         <th scope="row">
                             @if(!is_null($student->photo))
-                                <img src="{{asset('storage/'.$student->photo)}}" class="student-img" height="90" alt="icon"> 
+                                <img src="{{asset('storage/'.$student->photo)}}" class="student-img" alt="photo"> 
                             @endif
                         </th>
                         <td>{{$student->name}} {{$student->lastname}}</td>

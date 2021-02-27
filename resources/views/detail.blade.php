@@ -14,7 +14,7 @@
                             <p>Prénoms : <b>{{ $student->lastname }}</b> </p>
                             <p>Matricule : <b>{{ $student->matricule }}</b> </p>
                             <div class="block-success_info-illustrator">
-                                <p>Classe : <b>{{ $student->classe->title ?? '' }}</b> </p>
+                                <p>Classe : <b>{{ $student->classe->level->title ?? '' }}</b> </p>
                                 <!-- <img src="" alt=""> -->
                                 
                             </div>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-4">
                         <div class="block-success_illustrator">
-                            <img src="{{asset('storage/'.$student->photo)}}" alt="{{ $student->name }} {{ $student->lastname }}" height="200" class="cadre-photo">
+                            <img src="{{asset('storage/'.$student->photo)}}" alt="{{ $student->name }} {{ $student->lastname }}" class="cadre-photo">
                         </div>
                     </div>
                     @else

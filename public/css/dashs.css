@@ -289,7 +289,8 @@ background-color: #f3bdb2;
 }
 
 .student-img{
-    height: 4rem;
+    height: 6rem;
+    width: 6rem;
 }
   
 .action-btn{
@@ -517,3 +518,49 @@ color: blue;
       border-color: #ffa500;
   
   }
+
+  .btn-valids{
+    display: flex;
+  }
+
+  .btn-valids input[type=submit],.btn-valids .btn-dg{
+    margin: 0 1rem !important;
+    font-size: 1.7rem;
+    padding: .5rem 2rem;
+  }
+
+  .block-form_one{
+    width: 70%;
+    height: 30rem;
+    background-color: white;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+}
+
+.block-form_two{
+  width: 70%;
+  height: 53rem;
+  background-color: white;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+}
+
+.block-form_edit {
+    /* width: 70%; */
+    /* height: 45rem; */
+    background-color: white;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 49px;
+}

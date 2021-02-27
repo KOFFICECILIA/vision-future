@@ -31,7 +31,7 @@
                 @if(!Auth::check())
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Ecole
+                    centre
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item nav-link" href="{{url('/school/inscription')}}">Inscription</a>
@@ -41,13 +41,10 @@
                 </li>
                 @endif
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Centre</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{{url('about')}}">A Propos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">contact</a>
+                    <a class="nav-link " href="#footer" tabindex="-1" aria-disabled="true">contact</a>
                 </li>
             </ul>
             @if(!Auth::guard('school')->check())
@@ -80,7 +77,7 @@
                         <div class="logo">
                         </div>
                     </a>
-                    <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. In reiciendis laudantium corporis sit provident excepturi deleniti neque quia, asperiores, suscipit doloribus eligendi distinctio facere nam sunt et, porro pariatur mollitia?</h4>
+                    <h4>Nous espérons que votre visite sur notre site vous donnera entièrement satisfaction. Venez cerner quelques facettes de notre maison. Et puisque la perfection n’est pas de ce monde, nous restons ouverts à vos idées novatrices, vos critiques et vos propositions.</h4>
                   </div>
               </div>
             <div class="col-4">

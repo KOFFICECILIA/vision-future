@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="containt-success">
-            <div class="block-form">
+            <div class="block-form_two">
                 <div class="row">
                     {!! Form::open(['route' => 'students.store', 'id' => 'contact-form', 'files' => true]) !!}
                         <div class="row">
@@ -15,17 +15,17 @@
                             <div class="col-md-6 mb-2">
                                 <label for="name" class="couleur-form">Prénom</label>
                                 <input id="" type="text" name="lastname" class="form-input" required placeholder="Prénom de l'étudiant">
-                                <p class="comments"></p>
+                                <p class="comments"></p> 
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="" class="couleur-form">Classe</label>
                                 <!-- <input id="" type="text" name="" class="form-input" placeholder="Le Niveau de l'étudiant"> -->
-                                <select name="classe_id" id="classe_id" class="form-control" required>
+                                <select name="classe_id" id="classe_id" class="form-input" required>
                                     @foreach($classes as $classe)
-                                        <option value="{{$classe->id}}">{{$classe->title}}</option>
+                                        <option value="{{$classe->id}}" class="form-input">{{$classe->level->title}}</option>
                                     @endforeach
                                 </select>
-                                <small class="comments">Veuillez créer des classes d'abord</small>
+                                <small class="comments">Veuillez créer d'abord des classes</small>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="" class="couleur-form">Matricule</label>
@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="row">
+                        <div class="btn-valids">
                             {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
                             <a href="{{ url('/dashboard') }}" class="btn btn-danger">Annuler</a>
                         </div>

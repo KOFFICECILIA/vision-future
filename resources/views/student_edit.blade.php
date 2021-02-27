@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="containt-success">
-            <div class="block-form">
+            <div class="block-form_edit">
                 <div class="row">
                     {!! Form::model($student, ['route' => ['students.update', $student->id], 'method' => 'patch', 'files' => true]) !!}
                         <div class="row">
@@ -20,7 +20,7 @@
                             <div class="col-md-6 mb-2">
                                 <label for="classe_id" class="couleur-form">Classe</label>
                                 <!-- <input id="" type="text" name="" class="form-input" placeholder="Le Niveau de l'étudiant"> -->
-                                <select name="classe_id" id="classe_id" class="form-control" required>
+                                <select name="classe_id" id="classe_id" class="form-input" required>
                                     @foreach($classes as $classe)
                                         <option value="{{$classe->id}}" {!! $classe->id == $student->classe_id ? 'selected' : '' !!}>{{$classe->title}}</option>
                                     @endforeach
@@ -61,9 +61,9 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="row">
+                        <div class="btn-valids">
                             {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                            <a href="{{ url('/dashboard') }}" class="btn btn-danger">Annuler</a>
+                            <a href="{{ url('/dashboard') }}" class="btn btn-danger btn-dg">Annuler</a>
                         </div>
                         
                         {{--<div class="mt-5 form-footer">

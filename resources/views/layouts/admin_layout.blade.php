@@ -31,7 +31,7 @@
                     <ul class="sidebar-menu-list">
                         <li class="">
                             <a href="{{url('/dashboard')}}" class="sidebar-menu-item">
-                                <img src="{{asset('images/undraw_exams_g4ow.svg')}}" class="icon-side" alt=""> &nbsp;
+                                <img src="{{asset('images/home.svg')}}" class="icon-side" alt=""> &nbsp;
                                 Accueil
                             </a>
                             <div class="sidebar-menu-dropdown">
@@ -54,19 +54,19 @@
                         </li>--}}
                         <li>
                             <a href="{{url('/classes/register')}}" class="sidebar-menu-item">
-                                <img src="{{asset('images/undraw_exams_g4ow.svg')}}" class="icon-side" alt=""> &nbsp;
+                                <img src="{{asset('images/edit.svg')}}" class="icon-side" alt=""> &nbsp;
                                 Enregistrement classes
                             </a>
                         </li>
                         <li>
                             <a href="{{url('/student/register')}}" class="sidebar-menu-item">
-                                <img src="{{asset('images/undraw_exams_g4ow.svg')}}" class="icon-side" alt=""> &nbsp;
+                                <img src="{{asset('images/edit.svg')}}" class="icon-side" alt=""> &nbsp;
                                 Enregistrement élèves
                             </a>
                         </li>
                         <li>
                             <a href="{{url('/verification')}}" class="sidebar-menu-item">
-                                <img src="{{asset('images/undraw_exams_g4ow.svg')}}" class="icon-side" alt=""> &nbsp;
+                                <img src="{{asset('images/verify.svg')}}" class="icon-side" alt=""> &nbsp;
                                 Verification candidats
                             </a>
                         </li>
@@ -78,7 +78,7 @@
                             <form id="logout-form" class="form-inline w-100 ml-auto navbar-form" action="{{url('/logout')}}" method="POST">
                                 @csrf
                                 <a href="{{url('/logout')}}" class="sidebar-menu-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <img src="{{asset('images/undraw_exams_g4ow.svg')}}" class="icon-side" alt="">
+                                    <img src="{{asset('images/logout.svg')}}" class="icon-side" alt="">
                                     &nbsp; Se déconnecter
                                 </a>
                             </form>
@@ -101,7 +101,13 @@
                         <ul class="mb-0">
                             <li>
                                 <a href="#">
-                                   <img src="{{asset('images/undraw_book_lover_mkck.svg')}}" alt="icon"> 
+                                   <img src="{{asset('images/facebook1.svg')}}" alt="icon"> 
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a href="#">
+                                   <img src="{{asset('images/whatsapp.svg')}}" alt="icon"> 
                                 </a>
                             </li>
                             {{--<li>
